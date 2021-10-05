@@ -1,5 +1,0 @@
-MAC Adress                  PC name                 Current IP
-00-80-2F-19-D9-56           HUBUDPXIe-8880          10.92.6.29
-00-80-2F-19-D9-56           HUBUDPXIe-8880
-00:80:2F:25:FC:57           cRIO-9037-TSE           10.92.1.24
-00:80:2F:23:9B:8B           cRIO-9037-LIB           10.92.6.42
