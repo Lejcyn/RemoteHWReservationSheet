@@ -14,7 +14,7 @@ for line in re.findall('([-.0-9]+)\s+([-0-9a-f]{17})\s+(\w+)',data):
 
 for dev in ListOfDevices:
     dev.printout()
-    Tfile.writelines(dev.Name+dev.MAC+dev.IPadress)
+    Tfile.writelines(dev.Name+"\\t"+dev.MAC+"\\t"+dev.IPadress+"\\n")
    
 Tfile.close()
 print("Done")
