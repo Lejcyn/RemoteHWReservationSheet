@@ -18,5 +18,5 @@ WW=Data.isocalendar()[1]
 LastElem=TotalDays[len(TotalDays)-1]
 TotalWeeks=[[]for i in range(LastElem.isocalendar()[1])]
 for data in TotalDays:
-    TotalWeeks[data.isocalendar()[1]-1].append(data)
+    TotalWeeks[data.isocalendar()[1]-1].append(data) # Tu co nie gra
 print(TotalWeeks)
