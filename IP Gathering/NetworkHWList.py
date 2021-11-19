@@ -33,7 +33,7 @@ for idx,val in enumerate(Devices):
 
 for ip in range(2,50):
     res=os.popen(f"ping 10.92.1.{ip} -w 1000 -n 1")# For office
-    #res=os.popen(f"ping 10.92.6.{ip} -w 1000 -n 1")#For AE Lib
+    res=os.popen(f"ping 10.92.6.{ip} -w 1000 -n 1")#For AE Lib
 
 
 
