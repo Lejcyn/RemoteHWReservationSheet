@@ -10,7 +10,7 @@ def GetWrokingWeeks():
             d += datetime.timedelta(days=1)
         return days
 
-    TotalDays=workdays(datetime.datetime(2021, 1, 2),datetime.datetime(2021, 12, 31))
+    TotalDays=workdays(datetime.datetime(2022, 1, 2),datetime.datetime(2022, 12, 31))
 
     LastElem=TotalDays[-1].isocalendar()[1]
     TotalWeeks=[[]for i in range(LastElem)]
