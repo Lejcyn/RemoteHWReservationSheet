@@ -14,6 +14,8 @@ from Supportive import *
 # print(Devices)
 
 
+a=[1]
+b=[2]
+c=a.append(b)
+print(c)
 
-
-print(CalculateExcel(50))

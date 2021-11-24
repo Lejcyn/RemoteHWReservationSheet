@@ -1,8 +1,24 @@
 import os,re
 from os import name
-from ClassDeclare import *
-from Supportive import *
 Devices =["PXIe TOP 0","00-80-2F-19-D9-56"],["PXIe TOP 1","00:80:2F:19:D9:57"],["PXIe middle-0","00-80-2F-14-41-53"],["PXIe middle-1","00-80-2F-14-41-54"],["PXIe Bottom 0","00:80:2F:12:DF:2C"],["PXIe Bottom 1","00-80-2F-12-DF-2B"],["cRIO 9037-LIB 0","00:80:2F:23:9B:8A"],["cRIO 9037-LIB 1","00:80:2F:23:9B:8B"],["cRIO 9037-TSE 0","00:80:2F:25:FC:56"],["cRIO 9037-TSE 1","00:80:2F:25:FC:57"]
+class Device:
+
+    def __init__(self,name,mac):
+        self.IPadress="NO IP"
+        self.Name=name
+        self.MAC=mac
+
+    def getIP(self):
+        return self.IPadress
+
+    def getName(self):
+        return self.Name
+
+    def getMAC(self):
+        return self.MAC
+
+    def printout(self):
+        print(self.getName(),self.getMAC(),self.getIP())
 
 def InitDevices ():
     dlist=[]

@@ -30,8 +30,9 @@ def GetWrokingWeeks():
     return FinalList
 
 def CreateExcel(path,WorkingWeeks):
-    df = pd.read_excel(r"Prepare Excel\dfTemplate.xlsx")
+    df = pd.read_excel(r"dfTemplate.xlsx")
     writer=pd.ExcelWriter(path,engine='xlsxwriter')
+    pd.set_option("max_colwidth", 40)
     workbook  = writer.book
     merge_format = workbook.add_format({
             'bold': 1,
@@ -74,9 +75,10 @@ def InitDevices (Devices):
     return(dlist)
 
 def ReadIPList(FileList):
+    totalList=[]
     for file in FileList:
-        with open(file, ) as f:
+        with open(file) as f:
             reader = csv.reader(f)
-            your_list = list(reader)
+            totalList=totalList + list(reader)
     
-    return your_list
+    return totalList

@@ -1,4 +1,5 @@
 
+
 class Device:
 
     def __init__(self,name,mac):
@@ -17,4 +18,3 @@ class Device:
 
     def printout(self):
         print(self.getName(),self.getMAC(),self.getIP())
-
