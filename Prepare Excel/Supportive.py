@@ -2,6 +2,13 @@ import datetime
 import pandas as pd
 import xlsxwriter # CANNOT BE USED FOR MODIFICATION
 import openpyxl
+import csv
+from ClassDeclare import *
+from openpyxl.utils import get_column_letter
+
+def CalculateExcel(number):
+    return str(get_column_letter(number))
+
 def GetWrokingWeeks():
     FinalList=[]
     def workdays(d, end, excluded=(6, 7)):
@@ -38,7 +45,7 @@ def CreateExcel(path,WorkingWeeks):
         df.to_excel(writer,index=False,startcol=21,startrow = 1, sheet_name=week)
         df.to_excel(writer,index=False,startcol=28,startrow = 1, sheet_name=week)
         worksheet = writer.sheets[week]
-        worksheet.merge_range("B1:F1","Device1", merge_format)
+        worksheet.merge_range("A1:F1","Device1", merge_format)
         worksheet.merge_range("H1:M1","Device2", merge_format)
         worksheet.merge_range("O1:T1","Device3", merge_format)
         worksheet.merge_range("V1:AA1","Device4", merge_format)
@@ -46,12 +53,30 @@ def CreateExcel(path,WorkingWeeks):
     writer.close()
     workbook.close()
 
-def UpdateIPs(path,WorkingWeeks):
-    IPList=["PXIe Bottom10.92.6.46","HUBUDPXIE8880 TOP110.92.6.29"]
- 
+def UpdateIPs(path,WorkingWeeks,IPList):
+    
     xfile = openpyxl.load_workbook(path)
 
-    sheet = xfile.get_sheet_by_name(WorkingWeeks[0])
-    sheet['B1'] = IPList[0]
-    xfile.save('text2.xlsx')
-    xfile.close
+    for week in WorkingWeeks:
+        sheet = xfile.get_sheet_by_name(week)
+        col=1
+        for target in IPList:
+            adress = CalculateExcel(col)+'1'
+            sheet[adress]=target[0]+" "+target[1]
+            col=col+7
+    xfile.save(path)
+    xfile.close 
+
+def InitDevices (Devices):
+    dlist=[]
+    for device in Devices:
+        dlist.append(Device(device[0],device[1]))
+    return(dlist)
+
+def ReadIPList(FileList):
+    for file in FileList:
+        with open(file, ) as f:
+            reader = csv.reader(f)
+            your_list = list(reader)
+    
+    return your_list

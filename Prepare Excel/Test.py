@@ -2,6 +2,7 @@
 import re
 import subprocess
 import os
+from Supportive import *
 # f= os.popen('arp -a') 
 # for ip in range(2,50):
 #     res=os.popen(f"ping 10.92.1.{ip} -w 1000 -n 1")# For office
@@ -11,3 +12,8 @@ import os
 #     Devices[idx][1]=val[1].replace(":","-") 
 
 # print(Devices)
+
+
+
+
+print(CalculateExcel(50))
