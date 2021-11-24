@@ -1,6 +1,5 @@
 import os,re
 from os import name
-
 import schedule
 import time
 
@@ -32,7 +31,8 @@ def InitDevices ():
     return(dlist)
 
 def job():
-    print("I'm working...")
+    print("Remote Hardware IP CHecker is working\n")
+    print("Please do not turn this application off\n")
 
     for idx,val in enumerate(Devices):
         Devices[idx][1]=val[1].replace(":","-") 
@@ -45,8 +45,8 @@ def job():
 
     ListOfDevices=InitDevices()
     #Open File
-    open('IPList.txt', 'w').close()
-    Tfile = open("IPList.txt", "r+")
+    open('IPListPXI.txt', 'w').close()
+    Tfile = open("IPListPXI.txt", "r+")
     Tfile.truncate(0) # need '0' when using r+
     #Manage ARP
     f= os.popen('arp -a') 
@@ -68,11 +68,11 @@ def job():
 
 
 
-
+job()
 # schedule.every(1).minutes.do(job)
-# schedule.every().hour.do(job)
+schedule.every(1).hour.do(job)
 # schedule.every().day.at("10:30").do(job)
-schedule.every(10).seconds.do(job)
+#schedule.every(15).seconds.do(job)
 while 1:
     schedule.run_pending()
     time.sleep(1)
