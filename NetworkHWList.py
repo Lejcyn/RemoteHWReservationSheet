@@ -10,14 +10,14 @@ drive = GoogleDrive(gauth)
 
 #For PC
 
-RawFolderID='1KFQKPjpUvJdV4SAmN_z6XzIWhuKJeDMO'
-LogName='IPListPC.txt'
+#RawFolderID='1KFQKPjpUvJdV4SAmN_z6XzIWhuKJeDMO'
+#LogName='IPListPC.txt'
 
 
 #For PXI
 
-#RawFolderID='1cG_tS0eSLqb63O8r65cHyl6qJ8UUgS6A'
-#LogName='IPListPXI.txt' for PXI
+RawFolderID='1cG_tS0eSLqb63O8r65cHyl6qJ8UUgS6A'
+LogName='IPListPXI.txt'
 
 
 FolderID='"'+RawFolderID+'"'
@@ -50,7 +50,7 @@ def InitDevices ():
     return(dlist)
 
 def job():
-    print("I'm working...")
+    print("Please do not turn off, Remote Hardaware checking in progress")
 
     for idx,val in enumerate(Devices):
         Devices[idx][1]=val[1].replace(":","-") 
@@ -98,11 +98,11 @@ def job():
 
 
 
-
-# schedule.every(1).minutes.do(job)
+job()
+schedule.every(30).minutes.do(job)
 # schedule.every().hour.do(job)
 # schedule.every().day.at("10:30").do(job)
-schedule.every(10).seconds.do(job)
+#schedule.every(20).seconds.do(job)
 while 1:
     schedule.run_pending()
     time.sleep(1)
