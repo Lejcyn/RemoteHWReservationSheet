@@ -21,10 +21,15 @@ file6.GetContentFile('IPListPXI.txt') # Download file
 
 IPlistTXT=["IPListPC.txt","IPListPXI.txt"]
 
-ResSheet=r"C:\Users\tkowalc\OneDrive - National Instruments\Remote HW reserv\Draft Reservation Sheet.xlsx"
+ResSheet=r"C:\Users\tkowalc\OneDrive - National Instruments\Remote HW reserv\Reservation Sheet 2022.xlsx"
+#ResSheet=r"C:\Users\tkowalc\OneDrive - National Instruments\Remote HW reserv\Reservation Sheet 2021.xlsx"
+
 WorkingWeeks = GetWrokingWeeks()
 
-#CreateExcel(ResSheet,WorkingWeeks)
+#CAREFUL
+#CreateExcel(ResSheet,WorkingWeeks)# CAREFUL WITH THIS CALL< ITS OVERWRITING
+#CAREFUL
+
 #Static IP list for maintaining Excel layout
 IPList=["PXIe TOP","10.92.6.29"],["PXIe Middle","10.92.6.55"],["PXIe Bottom","110.92.6.29"],["cRIO 9037-LIB","10.92.6.29"],["cRIO 9037-TSE","NO IP"]
 
