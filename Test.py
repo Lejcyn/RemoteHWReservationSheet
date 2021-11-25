@@ -12,18 +12,54 @@ from Supportive import *
 #     Devices[idx][1]=val[1].replace(":","-") 
 
 # print(Devices)
+#---------------------------------------------------------------------------
+# import schedule
+# import time
 
-import schedule
-import time
+# def job():
+#     print("I'm working...")
+# schedule.every(1).seconds.do(job)
 
-def job():
-    print("I'm working...")
-schedule.every(1).seconds.do(job)
+# # schedule.every(1).minutes.do(job)
+# # schedule.every().hour.do(job)
+# # schedule.every().day.at("10:30").do(job)
 
-# schedule.every(1).minutes.do(job)
-# schedule.every().hour.do(job)
-# schedule.every().day.at("10:30").do(job)
+# while 1:
+#     schedule.run_pending()
+#     time.sleep(1)
+#--------------------------------------------------------------------
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+gauth = GoogleAuth()           
+drive = GoogleDrive(gauth)  
 
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
+
+# gfile = drive.CreateFile({'parents': [{'id': '1KFQKPjpUvJdV4SAmN_z6XzIWhuKJeDMO'}]})
+# # #Read file and set it as the content of this instance.
+# gfile.SetContentFile('IPListPC.txt')
+# gfile.Upload() # Upload the file.
+
+# print(gfile['id'])
+# # Initialize GoogleDriveFile instance with file id.
+# file6 = drive.CreateFile({'id': gfile['id']})
+# file6.GetContentFile('catlove.txt') # Download file as 'catlove.png'.
+
+
+RawFolderID='1KFQKPjpUvJdV4SAmN_z6XzIWhuKJeDMO'
+LogName='IPListPC.txt'
+
+FolderID='"'+RawFolderID+'"'
+Fstring=FolderID+" in parents and trashed=false"
+
+
+#Delete all files so far
+file_list = drive.ListFile({'q': Fstring}).GetList()
+for file in file_list:
+    print (file['id'])
+    tempfile=drive.CreateFile({'id': file['id']})
+    tempfile.Delete()
+
+#Upload Actual file
+gfile = drive.CreateFile({'parents': [{'id': RawFolderID}]})
+gfile.SetContentFile(LogName)
+gfile.Upload() # Upload the file.
