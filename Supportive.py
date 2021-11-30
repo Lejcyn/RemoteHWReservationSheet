@@ -79,6 +79,14 @@ def ReadIPList(FileList):
     for file in FileList:
         with open(file) as f:
             reader = csv.reader(f)
-            totalList=totalList + list(reader)
-    
+            totalList=totalList + list(reader)  
     return totalList
+
+def GetCurrentIPs(IPlistTXT):
+    IPList=["PXIe TOP","10.92.6.29"],["PXIe Middle","10.92.6.55"],["PXIe Bottom","110.92.6.29"],["cRIO 9037-LIB","10.92.6.29"],["cRIO 9037-TSE","NO IP"]
+    NewIPList= ReadIPList(IPlistTXT)
+    for idx,dev in enumerate(IPList):
+        for i,newdev in enumerate(NewIPList):
+            if dev[0]in newdev[0]:
+                dev[1]= newdev[2]
+    return IPList
