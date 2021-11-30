@@ -1,18 +1,12 @@
-import pandas as pd
+
 from Supportive import *
-from ClassDeclare import *
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 import schedule,time
 gauth = GoogleAuth()           
 drive = GoogleDrive(gauth)  
-import sys
 
-def myexcepthook(type, value, traceback, oldhook=sys.excepthook):
-    oldhook(type, value, traceback)
-    input("Press RETURN. ")    # use input() in Python 3.x
 
-sys.excepthook = myexcepthook
 
 ResSheet21=r"C:\Users\tkowalc\OneDrive - National Instruments\Remote HW reserv\Reservation Sheet 2021.xlsx"
 WorkingWeeks21 = GetWrokingWeeks(2021)
@@ -44,7 +38,6 @@ def job():
 
 
 job()
-input("Press enter to proceed...")
 schedule.every(30).minutes.do(job)
 # schedule.every().hour.do(job)
 # schedule.every().day.at("10:30").do(job)
