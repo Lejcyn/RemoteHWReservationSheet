@@ -9,7 +9,7 @@ from openpyxl.utils import get_column_letter
 def CalculateExcel(number):
     return str(get_column_letter(number))
 
-def GetWrokingWeeks():#Change date if needed
+def GetWrokingWeeks(Year):#Change date if needed
     FinalList=[]
     def workdays(d, end, excluded=(6, 7)):
         days = []
@@ -18,7 +18,7 @@ def GetWrokingWeeks():#Change date if needed
                 days.append(d)
             d += datetime.timedelta(days=1)
         return days
-    TotalDays=workdays(datetime.datetime(2021, 1, 2),datetime.datetime(2021, 12, 31))
+    TotalDays=workdays(datetime.datetime(Year, 1, 2),datetime.datetime(Year, 12, 31))
     LastElem=TotalDays[-1].isocalendar()[1]
     TotalWeeks=[[]for i in range(LastElem)]
     for data in TotalDays:
