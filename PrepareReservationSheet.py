@@ -23,7 +23,7 @@ def job():
     for file in file_list:
         file6 = drive.CreateFile({'id': file['id']})
     file6.GetContentFile('IPListPC.txt') # Download file 
-    #For PXI
+    #For PXIsa
     file_list = drive.ListFile({'q': "'1cG_tS0eSLqb63O8r65cHyl6qJ8UUgS6A' in parents and trashed=false"}).GetList()
     for file in file_list:
         file6 = drive.CreateFile({'id': file['id']})

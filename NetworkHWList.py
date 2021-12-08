@@ -3,10 +3,10 @@ from os import name
 
 import schedule
 import time
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
-gauth = GoogleAuth()           
-drive = GoogleDrive(gauth)  
+# from pydrive.auth import GoogleAuth
+# from pydrive.drive import GoogleDrive
+# gauth = GoogleAuth()           
+# drive = GoogleDrive(gauth)  
 
 #For PC
 
@@ -16,12 +16,12 @@ drive = GoogleDrive(gauth)
 
 #For PXI
 
-RawFolderID='1cG_tS0eSLqb63O8r65cHyl6qJ8UUgS6A'
+# RawFolderID='1cG_tS0eSLqb63O8r65cHyl6qJ8UUgS6A'
 LogName='IPListPXI.txt'
 
 
-FolderID='"'+RawFolderID+'"'
-Fstring=FolderID+" in parents and trashed=false"
+# FolderID='"'+RawFolderID+'"'
+# Fstring=FolderID+" in parents and trashed=false"
 
 Devices =["PXIe TOP 0","00-80-2F-19-D9-56"],["PXIe TOP 1","00:80:2F:19:D9:57"],["PXIe middle-0","00-80-2F-14-41-53"],["PXIe middle-1","00-80-2F-14-41-54"],["PXIe Bottom 0","00:80:2F:12:DF:2C"],["PXIe Bottom 1","00-80-2F-12-DF-2B"],["cRIO 9037-LIB 0","00:80:2F:23:9B:8A"],["cRIO 9037-LIB 1","00:80:2F:23:9B:8B"],["cRIO 9037-TSE 0","00:80:2F:25:FC:56"],["cRIO 9037-TSE 1","00:80:2F:25:FC:57"]
 class Device:
@@ -84,25 +84,28 @@ def job():
                 Tfile.writelines(check)
     Tfile.close()
     
-    #Delete all files so far
-    file_list = drive.ListFile({'q': Fstring}).GetList()
-    for file in file_list:
-        print (file['id'])
-        tempfile=drive.CreateFile({'id': file['id']})
-        tempfile.Delete()
+#----------------------------------------------------
 
-    #Upload Actual file
-    gfile = drive.CreateFile({'parents': [{'id': RawFolderID}]})
-    gfile.SetContentFile(LogName)
-    gfile.Upload() # Upload the file.
+
+    # #Delete all files so far
+    # file_list = drive.ListFile({'q': Fstring}).GetList()
+    # for file in file_list:
+    #     print (file['id'])
+    #     tempfile=drive.CreateFile({'id': file['id']})
+    #     tempfile.Delete()
+
+    # #Upload Actual file
+    # gfile = drive.CreateFile({'parents': [{'id': RawFolderID}]})
+    # gfile.SetContentFile(LogName)
+    # gfile.Upload() # Upload the file.
 
 
 
 job()
-schedule.every(30).minutes.do(job)
+#schedule.every(30).minutes.do(job)
 # schedule.every().hour.do(job)
 # schedule.every().day.at("10:30").do(job)
-#schedule.every(20).seconds.do(job)
+schedule.every(20).seconds.do(job)
 while 1:
     schedule.run_pending()
     time.sleep(1)
