@@ -1,5 +1,6 @@
 import datetime
 import pandas as pd
+import os
 import xlsxwriter # CANNOT BE USED FOR MODIFICATION
 import openpyxl
 import csv
@@ -109,3 +110,33 @@ def GetCurrentIPs(IPlistTXT):
             if dev[0]in newdev[0]:
                 dev[1]= newdev[2]
     return IPList
+
+class Device:
+
+    def __init__(self,name,mac):
+        self.IPadress="NO IP"
+        self.Name=name
+        self.MAC=mac
+
+    def getIP(self):
+        return self.IPadress
+
+    def getName(self):
+        return self.Name
+
+    def getMAC(self):
+        return self.MAC
+
+    def printout(self):
+        print(self.getName(),self.getMAC(),self.getIP())
+
+def InitDevices (Devices):
+    dlist=[]
+    for device in Devices:
+        dlist.append(Device(device[0],device[1]))
+    return(dlist)
+
+def PingTargets(start,end):
+    for ip in range(start,end):
+        res=os.popen(f"ping 10.92.1.{ip} -w 1000 -n 1")# For office
+        res=os.popen(f"ping 10.92.6.{ip} -w 1000 -n 1")#For AE Lib

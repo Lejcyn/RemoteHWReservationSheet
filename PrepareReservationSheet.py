@@ -13,7 +13,6 @@ IPlistTXT=["IPListPXI.txt"]
 def job():
 
     IPList=GetCurrentIPs(IPlistTXT)
-
     print(IPList)
     UpdateIPs(ResSheet21,WorkingWeeks21,IPList)
     UpdateIPs(ResSheet22,WorkingWeeks22,IPList)
@@ -21,9 +20,9 @@ def job():
 
 job()
 #schedule.every(30).minutes.do(job)
-# schedule.every().hour.do(job)
+schedule.every(1).hour.do(job)
 # schedule.every().day.at("10:30").do(job)
-schedule.every(20).seconds.do(job)
+#schedule.every(20).seconds.do(job)
 while 1:
     schedule.run_pending()
     time.sleep(1)
