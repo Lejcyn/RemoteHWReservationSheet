@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import xlsxwriter # CANNOT BE USED FOR MODIFICATION
 import openpyxl
-import csv
+import csv,re
 from openpyxl.utils import get_column_letter
 
 class Device:
@@ -72,7 +72,6 @@ def CreateExcel(path,WorkingWeeks):
         worksheet.merge_range("V1:AA1","Device4", merge_format)
         worksheet.merge_range("AC1:AH1","Device5", merge_format)
     writer.close()
-    workbook.close()
 
 def UpdateIPs(path,WorkingWeeks,IPList):
     
@@ -140,3 +139,30 @@ def PingTargets(start,end):
     for ip in range(start,end):
         res=os.popen(f"ping 10.92.1.{ip} -w 1000 -n 1")# For office
         res=os.popen(f"ping 10.92.6.{ip} -w 1000 -n 1")#For AE Lib
+
+def ARP(ListOfDevices):
+    #Manage ARP
+    f= os.popen('arp -a') 
+    data = f.read()
+    kek=re.findall('([-.0-9]+)\s+([-0-9a-f]{17})\s+(\w+)',data)
+    for line in kek:
+        for device in ListOfDevices:
+            if line[1].lower() == device.getMAC().lower():
+                device.IPadress=line[0]
+    return ListOfDevices
+
+def WriteIPtoFile(LogName,ListOfDevices):
+    #Open File
+    open(LogName, 'w+').close()
+    Tfile = open(LogName, "r+")
+    Tfile.truncate(0) # need '0' when using r+
+    
+    ARP(ListOfDevices)
+    #Write to file only found devices
+    for dev in ListOfDevices:
+            str=dev.getIP()
+            if str  != 'NO IP':
+                dev.printout()
+                check=dev.getName()+","+dev.getMAC()+","+dev.getIP()+"\n"
+                Tfile.writelines(check)
+    Tfile.close()
