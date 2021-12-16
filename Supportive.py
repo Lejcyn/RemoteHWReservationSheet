@@ -110,25 +110,6 @@ def GetCurrentIPs(IPlistTXT):
                 dev[1]= newdev[2]
     return IPList
 
-class Device:
-
-    def __init__(self,name,mac):
-        self.IPadress="NO IP"
-        self.Name=name
-        self.MAC=mac
-
-    def getIP(self):
-        return self.IPadress
-
-    def getName(self):
-        return self.Name
-
-    def getMAC(self):
-        return self.MAC
-
-    def printout(self):
-        print(self.getName(),self.getMAC(),self.getIP())
-
 def InitDevices (Devices):
     dlist=[]
     for device in Devices:
